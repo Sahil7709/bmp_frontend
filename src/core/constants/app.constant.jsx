@@ -1,0 +1,40 @@
+export const APPLICATION_CONSTANTS = {
+  STORAGE: {
+    TOKEN: "token",
+    USER_DETAILS: "user",
+    LANGUAGE: "lang",
+  },
+  ALLOW_FILES_EXTENSION: "pdf,jpeg,xls",
+  CONTENT_TYPES: "application/json",
+};
+
+export const REQUEST_STATUS = {
+  PENDING: "PENDING",
+  MATCHED: "MATCHED",
+  ACCEPTED: "ACCEPTED",
+  PICKED_UP: "PICKED_UP",
+  DELIVERED: "DELIVERED",
+  CANCELLED: "CANCELLED"
+};
+
+export const DELIVERY_STATUS = {
+  PENDING: "PENDING",
+  ASSIGNED: "ASSIGNED",
+  PICKED_UP: "PICKED_UP",
+  IN_TRANSIT: "IN_TRANSIT",
+  DELIVERED: "DELIVERED",
+  FAILED: "FAILED",
+  REJECTED: "REJECTED"
+};
+
+export const KYC_STATUS = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED"
+};
+
+export const USER_ROLES = {
+  USER: "USER",
+  TRAVELER: "TRAVELER",
+  ADMIN: "ADMIN"
+};

@@ -1,0 +1,88 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import ApiService from '../../core/services/api.service';
+import { showError, showSuccess } from '../../core/utils/toast.util';
+
+// Initial state
+const initialState = {
+  travelers: [],
+  loading: false,
+  error: null
+};
+
+// Async thunks
+export const getAllTravelers = createAsyncThunk(
+  'admin/getAllTravelers',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const response = await ApiService.getAllTravelers();
+      return response.data;
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Failed to fetch travelers.';
+      showError(errorMessage);
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const approveTraveler = createAsyncThunk(
+  'admin/approveTraveler',
+  async (travelerId, { getState, rejectWithValue }) => {
+    try {
+      const response = await ApiService.approveKYC(travelerId);
+      showSuccess('Traveler approved successfully!');
+      return response.data;
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Failed to approve traveler.';
+      showError(errorMessage);
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+// Admin slice
+const adminSlice = createSlice({
+  name: 'admin',
+  initialState,
+  reducers: {
+    clearErrors: (state) => {
+      state.error = null;
+    }
+  },
+  extraReducers: (builder) => {
+    builder
+      // Get all travelers
+      .addCase(getAllTravelers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getAllTravelers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.travelers = action.payload.travelers;
+      })
+      .addCase(getAllTravelers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Approve traveler
+      .addCase(approveTraveler.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(approveTraveler.fulfilled, (state, action) => {
+        state.loading = false;
+        // Update the approved traveler in the list
+        const index = state.travelers.findIndex(traveler => traveler._id === action.payload.traveler._id);
+        if (index !== -1) {
+          state.travelers[index] = action.payload.traveler;
+        }
+      })
+      .addCase(approveTraveler.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  }
+});
+
+export const { clearErrors } = adminSlice.actions;
+
+export default adminSlice.reducer;
