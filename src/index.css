@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10,7 +10,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Ensure body takes full height for flex layouts */
   min-height: 100vh;
 }
 
@@ -20,10 +19,10 @@ a {
 
 button {
   cursor: pointer;
-}
+} */
 
 /* Responsive typography */
-html {
+/* html {
   font-size: 16px;
 }
 
@@ -37,16 +36,16 @@ html {
   html {
     font-size: 13px;
   }
-}
+} */
 
 /* Ensure images are responsive */
-img {
+/* img {
   max-width: 100%;
   height: auto;
-}
+} */
 
 /* Responsive container */
-.container {
+/* .container {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -76,10 +75,10 @@ img {
   .container {
     max-width: 1140px;
   }
-}
+} */
 
 /* Responsive grid adjustments */
-.row {
+/* .row {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -94,9 +93,213 @@ img {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-}
+} */
 
 /* Mobile-first responsive utilities */
+/* .hidden-xs {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .hidden-xs {
+    display: block !important;
+  }
+}
+
+.hidden-sm {
+  display: block !important;
+}
+
+@media (min-width: 768px) {
+  .hidden-sm {
+    display: none !important;
+  }
+} */
+
+/* Touch targets for mobile */
+/* @media (max-width: 768px) {
+  button, a, input, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .MuiButton-root {
+    min-height: 44px !important;
+  }
+  
+  .MuiListItem-root {
+    min-height: 44px !important;
+  }
+} */
+ 
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ================================
+   THEME VARIABLES
+================================ */
+:root {
+  /* Font Family */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;      /* 16px */
+  --font-size-lg: 1.25rem;   /* 20px */
+  --font-size-xl: 1.5rem;    /* 24px */
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-link: #2563eb;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --color-background: #ffffff;
+}
+
+/* ================================
+   RESET
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   BODY
+================================ */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  min-height: 100vh;
+}
+
+/* ================================
+   RESPONSIVE FONT SIZE
+================================ */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* ================================
+   ELEMENT DEFAULTS
+================================ */
+a {
+  text-decoration: none;
+  color: var(--color-link);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+}
+
+/* ================================
+   TEXT UTILITIES
+================================ */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-danger { color: var(--color-danger); }
+.text-success { color: var(--color-success); }
+
+/* ================================
+   IMAGES
+================================ */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ================================
+   CONTAINER
+================================ */
+.container {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+@media (min-width: 576px) {
+  .container { max-width: 540px; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+}
+@media (min-width: 992px) {
+  .container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+}
+
+/* ================================
+   GRID
+================================ */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col {
+  flex: 1;
+  padding: 0 15px;
+}
+
+/* ================================
+   RESPONSIVE VISIBILITY
+================================ */
 .hidden-xs {
   display: none !important;
 }
@@ -117,17 +320,16 @@ img {
   }
 }
 
-/* Touch targets for mobile */
+/* ================================
+   MOBILE TOUCH TARGETS
+================================ */
 @media (max-width: 768px) {
   button, a, input, select {
     min-height: 44px;
     min-width: 44px;
   }
-  
-  .MuiButton-root {
-    min-height: 44px !important;
-  }
-  
+
+  .MuiButton-root,
   .MuiListItem-root {
     min-height: 44px !important;
   }
