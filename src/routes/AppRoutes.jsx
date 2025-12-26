@@ -8,6 +8,7 @@ import TravelerLayout from '../layouts/TravelerLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import TravelerHomes from '../pages/traveler/TravelerHome';
 import RequestFormPage from '../pages/user/requestform/RequestFormPage';
+import UserDashboard from '../pages/user/UserDashboard';
 
 // Lazy loaded pages
 const Home = lazy(() => import('../pages/public/Home'));
@@ -16,7 +17,7 @@ const Services = lazy(() => import('../pages/public/Services'));
 const Contact = lazy(() => import('../pages/public/Contact'));
 const Login = lazy(() => import('../pages/auth/Login'));
 const Register = lazy(() => import('../pages/auth/Register'));
-const UserHome = lazy(() => import('../pages/user/Home'));
+const UserHome = lazy(() => import('../pages/user/UserDashboard'));
 const UserNewRequest = lazy(() => import('../pages/user/NewRequest'));
 const UserTrack = lazy(() => import('../pages/user/Track'));
 const UserHistory = lazy(() => import('../pages/user/History'));
@@ -80,15 +81,18 @@ const AppRoutes = () => {
             <UserLayout />
             // </ProtectedRoute>
           }>
-            <Route index element={<UserHome />} />
-            {/* <Route path="home" element={<UserHome />} /> */}
+            <Route index element={<UserDashboard />} />
+            <Route path="dashboard" element={<UserDashboard />} />
             <Route path="new-request" element={<UserNewRequest />} />
             <Route path="track/:id" element={<UserTrack />} />
             <Route path="history" element={<UserHistory />} />
+            <Route path="history" element={<UserHistory />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="track" element={<UserTrack />} />
+
             <Route path="booking-confirmation" element={<UserBookingConfirmation />} />
           </Route>
-          <Route path='/user/home' element={<RequestFormPage />} />
+          <Route path='/user/requestform' element={<RequestFormPage />} />
 
 
           {/* Traveler routes */}

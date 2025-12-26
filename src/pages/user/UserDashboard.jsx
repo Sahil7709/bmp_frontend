@@ -19,7 +19,7 @@ import {
 import { useSelector } from 'react-redux';
 import useResponsive from '../../core/hooks/useResponsive';
 
-const UserHome = () => {
+const UserDashboard = () => {
   const navigate = useNavigate();
   const { user } = useSelector(state => state.auth);
   const { isMobile, isTablet } = useResponsive();
@@ -398,4 +398,4 @@ const UserHome = () => {
   );
 };
 
-export default UserHome;
+export default UserDashboard;
