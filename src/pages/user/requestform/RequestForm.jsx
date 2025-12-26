@@ -39,6 +39,19 @@ const RequestForm = () => {
         parcelValue: "",
         parcelNotes: "",
 
+        // package
+  packageSize: "",
+  deliverySpeed: "",
+  parcelWeight: "",
+  parcelLength: "",
+  parcelWidth: "",
+  parcelHeight: "",
+  parcelContents: "",
+  parcelValue: "",
+  parcelType: "",
+  parcelNotes: "",
+
+
         // Delivery fields (StepPickup)
         deliveryAddress: "",
         deliveryCity: "",
