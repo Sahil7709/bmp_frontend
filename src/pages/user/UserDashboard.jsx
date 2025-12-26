@@ -1,400 +1,188 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { 
-  Box, 
-  Typography, 
-  Grid, 
-  Card, 
-  CardContent, 
-  CardActions, 
-  Button,
-  Alert
-} from '@mui/material';
-import { 
-  AddBox, 
-  History, 
-  TrackChanges, 
-  LocalShipping
-} from '@mui/icons-material';
-import { useSelector } from 'react-redux';
-import useResponsive from '../../core/hooks/useResponsive';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  PlusSquare,
+  History,
+  Target,
+  Truck
+} from "lucide-react";
+import useResponsive from "../../core/hooks/useResponsive";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
-  const { user } = useSelector(state => state.auth);
-  const { isMobile, isTablet } = useResponsive();
+  const { user } = useSelector((state) => state.auth);
+  const { isMobile } = useResponsive();
 
-  // Mock data - in a real app this would come from your API
   const stats = {
     activeRequests: 2,
     completedDeliveries: 15,
-    totalSpent: 185.50
+    totalSpent: 185.5,
   };
 
   const recentRequests = [
-    { id: 1, from: 'New York, NY', to: 'Boston, MA', status: 'In Transit', date: '2023-06-15' },
-    { id: 2, from: 'Chicago, IL', to: 'Detroit, MI', status: 'Pending', date: '2023-06-18' }
+    {
+      id: 1,
+      from: "New York, NY",
+      to: "Boston, MA",
+      status: "In Transit",
+      date: "2023-06-15",
+    },
+    {
+      id: 2,
+      from: "Chicago, IL",
+      to: "Detroit, MI",
+      status: "Pending",
+      date: "2023-06-18",
+    },
   ];
 
   return (
-    <Box sx={{ p: isMobile ? 1 : 3 }}>
-      <Typography 
-        variant={isMobile ? "h5" : "h4"} 
-        gutterBottom
-        sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem', md: '2rem' } }}
-      >
-        Welcome back, {user?.name || 'User'}!
-      </Typography>
-      
-      {/* Booking Success Message */}
-      <Alert 
-        severity="info" 
-        sx={{ 
-          mb: 3,
-          flexDirection: isMobile ? 'column' : 'row',
-          alignItems: isMobile ? 'flex-start' : 'center'
-        }}
-      >
-        <Box sx={{ flexGrow: 1, mb: isMobile ? 1 : 0 }}>
-          Welcome to your dashboard! To book a new parcel, please visit the homepage and click "Book My Parcel".
-        </Box>
-        <Button 
-          variant="outlined" 
-          size={isMobile ? "small" : "medium"}
-          sx={{ 
-            ml: isMobile ? 0 : 2,
-            mt: isMobile ? 1 : 0,
-            fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-          }}
-          onClick={() => navigate('/')}
+    <div className="p-4 md:p-6 bg-blue-50 min-h-screen">
+      {/* Welcome */}
+      <h1 className="text-xl md:text-3xl font-semibold text-blue-800 mb-4">
+        Welcome back, {user?.name || "User"}!
+      </h1>
+
+      {/* Info Alert */}
+      <div className="bg-blue-100 border-l-4 border-blue-600 text-blue-800 p-4 rounded-md flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+        <p>
+          Welcome to your dashboard! To book a new parcel, visit the homepage and
+          click <strong>“Book My Parcel”</strong>.
+        </p>
+        <button
+          onClick={() => navigate("/")}
+          className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md hover:bg-blue-600 hover:text-white transition"
         >
           Go to Homepage
-        </Button>
-      </Alert>
-      
-      <Grid container spacing={isMobile ? 1 : 3} sx={{ mb: isMobile ? 1 : 3 }}>
-        <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ minHeight: isMobile ? 100 : 120 }}>
-            <CardContent>
-              <Typography 
-                variant={isMobile ? "subtitle1" : "h6"} 
-                component="div"
-                sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-              >
-                Active Requests
-              </Typography>
-              <Typography 
-                variant={isMobile ? "h4" : "h3"} 
-                component="div"
-                sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' } }}
-              >
-                {stats.activeRequests}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        
-        <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ minHeight: isMobile ? 100 : 120 }}>
-            <CardContent>
-              <Typography 
-                variant={isMobile ? "subtitle1" : "h6"} 
-                component="div"
-                sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-              >
-                Completed Deliveries
-              </Typography>
-              <Typography 
-                variant={isMobile ? "h4" : "h3"} 
-                component="div"
-                sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' } }}
-              >
-                {stats.completedDeliveries}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        
-        <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ minHeight: isMobile ? 100 : 120 }}>
-            <CardContent>
-              <Typography 
-                variant={isMobile ? "subtitle1" : "h6"} 
-                component="div"
-                sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-              >
-                Total Spent
-              </Typography>
-              <Typography 
-                variant={isMobile ? "h4" : "h3"} 
-                component="div"
-                sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' } }}
-              >
-                ${stats.totalSpent}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-      
-      <Box sx={{ mb: isMobile ? 1 : 3 }}>
-        <Box sx={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          mb: 2,
-          flexDirection: isMobile ? 'column' : 'row',
-          gap: isMobile ? 1 : 0
-        }}>
-          <Typography 
-            variant={isMobile ? "h6" : "h5"}
-            sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' } }}
+        </button>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+        {[
+          { label: "Active Requests", value: stats.activeRequests },
+          { label: "Completed Deliveries", value: stats.completedDeliveries },
+          { label: "Total Spent", value: `$${stats.totalSpent}` },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="bg-white rounded-xl shadow-md border-l-4 border-blue-600 p-4"
           >
+            <p className="text-sm md:text-base text-gray-600">
+              {item.label}
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold text-blue-800">
+              {item.value}
+            </h2>
+          </div>
+        ))}
+      </div>
+
+      {/* Recent Requests */}
+      <div className="mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-2">
+          <h2 className="text-lg md:text-xl font-semibold text-blue-800">
             Recent Requests
-          </Typography>
-          <Button 
-            variant="outlined" 
-            size={isMobile ? "small" : "medium"}
-            sx={{ 
-              fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' },
-              minWidth: isMobile ? 'auto' : 'initial'
-            }}
-            onClick={() => navigate('/user/history')}
+          </h2>
+          <button
+            onClick={() => navigate("/user/history")}
+            className="border border-blue-600 text-blue-600 px-3 py-1 rounded-md hover:bg-blue-600 hover:text-white transition"
           >
             View All
-          </Button>
-        </Box>
-        
-        <Grid container spacing={isMobile ? 1 : 2}>
-          {recentRequests.map(request => (
-            <Grid item xs={12} key={request.id}>
-              <Card>
-                <CardContent sx={{ pb: isMobile ? 1 : 2 }}>
-                  <Typography 
-                    variant={isMobile ? "subtitle1" : "h6"}
-                    sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-                  >
-                    Request #{request.id}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    color="textSecondary"
-                    sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' } }}
-                  >
-                    From: {request.from}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    color="textSecondary"
-                    sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' } }}
-                  >
-                    To: {request.to}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    color="textSecondary"
-                    sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' } }}
-                  >
-                    Date: {request.date}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      mt: 1,
-                      fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-                    }}
-                  >
-                    Status: <strong>{request.status}</strong>
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ 
-                  pt: 0,
-                  justifyContent: 'flex-end',
-                  px: isMobile ? 1 : 2,
-                  pb: isMobile ? 1 : 2
-                }}>
-                  <Button 
-                    size={isMobile ? "small" : "medium"}
-                    sx={{ 
-                      fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' },
-                      minWidth: isMobile ? 'auto' : 'initial'
-                    }}
-                    onClick={() => navigate(`/user/track/${request.id}`)}
-                  >
-                    Track
-                  </Button>
-                  <Button 
-                    size={isMobile ? "small" : "medium"}
-                    sx={{ 
-                      fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' },
-                      minWidth: isMobile ? 'auto' : 'initial'
-                    }}
-                    onClick={() => navigate('/user/history')}
-                  >
-                    Details
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
+          </button>
+        </div>
+
+        <div className="space-y-3">
+          {recentRequests.map((req) => (
+            <div
+              key={req.id}
+              className="bg-white rounded-lg shadow border p-4"
+            >
+              <h3 className="font-semibold text-blue-700">
+                Request #{req.id}
+              </h3>
+              <p className="text-sm text-gray-600">From: {req.from}</p>
+              <p className="text-sm text-gray-600">To: {req.to}</p>
+              <p className="text-sm text-gray-600">Date: {req.date}</p>
+              <p className="text-sm mt-1">
+                Status:{" "}
+                <span className="font-semibold text-blue-600">
+                  {req.status}
+                </span>
+              </p>
+
+              <div className="flex justify-end gap-2 mt-3">
+                <button
+                  onClick={() => navigate(`/user/track/${req.id}`)}
+                  className="px-3 py-1 text-sm border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white transition"
+                >
+                  Track
+                </button>
+                <button
+                  onClick={() => navigate("/user/history")}
+                  className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
           ))}
-        </Grid>
-      </Box>
-      
-      <Box>
-        <Typography 
-          variant={isMobile ? "h6" : "h5"} 
-          gutterBottom
-          sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' } }}
-        >
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div>
+        <h2 className="text-lg md:text-xl font-semibold text-blue-800 mb-4">
           Quick Actions
-        </Typography>
-        <Grid container spacing={isMobile ? 1 : 2}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card sx={{ minHeight: isMobile ? 180 : 200 }}>
-              <CardContent sx={{ 
-                textAlign: 'center',
-                pb: isMobile ? 1 : 2
-              }}>
-                <AddBox sx={{ 
-                  fontSize: isMobile ? 32 : 48, 
-                  color: 'primary.main', 
-                  mb: 1 
-                }} />
-                <Typography 
-                  variant={isMobile ? "subtitle1" : "h6"} 
-                  gutterBottom
-                  sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-                >
-                  New Request
-                </Typography>
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    mb: isMobile ? 1 : 2,
-                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-                  }}
-                >
-                  Visit homepage to book a parcel
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  fullWidth
-                  size={isMobile ? "small" : "medium"}
-                  sx={{ 
-                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-                  }}
-                  onClick={() => navigate('/user/new-request')}
-                >
-                  Book Parcel
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Card sx={{ minHeight: isMobile ? 180 : 200 }}>
-              <CardContent sx={{ 
-                textAlign: 'center',
-                pb: isMobile ? 1 : 2
-              }}>
-                <History sx={{ 
-                  fontSize: isMobile ? 32 : 48, 
-                  color: 'secondary.main', 
-                  mb: 1 
-                }} />
-                <Typography 
-                  variant={isMobile ? "subtitle1" : "h6"} 
-                  gutterBottom
-                  sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-                >
-                  My History
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  fullWidth
-                  size={isMobile ? "small" : "medium"}
-                  sx={{ 
-                    mt: isMobile ? 1 : 2,
-                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-                  }}
-                  onClick={() => navigate('/user/history')}
-                >
-                  View History
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Card sx={{ minHeight: isMobile ? 180 : 200 }}>
-              <CardContent sx={{ 
-                textAlign: 'center',
-                pb: isMobile ? 1 : 2
-              }}>
-                <TrackChanges sx={{ 
-                  fontSize: isMobile ? 32 : 48, 
-                  color: 'success.main', 
-                  mb: 1 
-                }} />
-                <Typography 
-                  variant={isMobile ? "subtitle1" : "h6"} 
-                  gutterBottom
-                  sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-                >
-                  Track Parcel
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  fullWidth
-                  size={isMobile ? "small" : "medium"}
-                  sx={{ 
-                    mt: isMobile ? 1 : 2,
-                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-                  }}
-                  onClick={() => navigate('/user/track')}
-                >
-                  Track Now
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Card sx={{ minHeight: isMobile ? 180 : 200 }}>
-              <CardContent sx={{ 
-                textAlign: 'center',
-                pb: isMobile ? 1 : 2
-              }}>
-                <LocalShipping sx={{ 
-                  fontSize: isMobile ? 32 : 48, 
-                  color: 'warning.main', 
-                  mb: 1 
-                }} />
-                <Typography 
-                  variant={isMobile ? "subtitle1" : "h6"} 
-                  gutterBottom
-                  sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }}
-                >
-                  My Profile
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  fullWidth
-                  size={isMobile ? "small" : "medium"}
-                  sx={{ 
-                    mt: isMobile ? 1 : 2,
-                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' }
-                  }}
-                  onClick={() => navigate('/user/profile')}
-                >
-                  View Profile
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            {
+              title: "New Request",
+              icon: <PlusSquare className="w-10 h-10 text-blue-600" />,
+              action: () => navigate("/user/new-request"),
+              btn: "Book Parcel",
+            },
+            {
+              title: "My History",
+              icon: <History className="w-10 h-10 text-blue-700" />,
+              action: () => navigate("/user/history"),
+              btn: "View History",
+            },
+            {
+              title: "Track Parcel",
+              icon: <Target className="w-10 h-10 text-blue-800" />,
+              action: () => navigate("/user/track"),
+              btn: "Track Now",
+            },
+            {
+              title: "My Profile",
+              icon: <Truck className="w-10 h-10 text-blue-500" />,
+              action: () => navigate("/user/profile"),
+              btn: "View Profile",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center"
+            >
+              {item.icon}
+              <h3 className="mt-2 font-semibold text-blue-800">
+                {item.title}
+              </h3>
+              <button
+                onClick={item.action}
+                className="mt-4 w-full py-2 rounded-md text-white font-medium bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 transition"
+              >
+                {item.btn}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
