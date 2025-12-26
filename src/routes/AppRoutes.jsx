@@ -6,6 +6,8 @@ import PublicLayout from '../layouts/PublicLayout';
 import UserLayout from '../layouts/UserLayout';
 import TravelerLayout from '../layouts/TravelerLayout';
 import AdminLayout from '../layouts/AdminLayout';
+import TravelerHomes from '../pages/traveler/TravelerHome';
+import RequestFormPage from '../pages/user/requestform/RequestFormPage';
 
 // Lazy loaded pages
 const Home = lazy(() => import('../pages/public/Home'));
@@ -61,35 +63,39 @@ const AppRoutes = () => {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<PublicLayout />}>  
+          <Route path="/" element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="services" element={<Services />} />
             <Route path="contact" element={<Contact />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path='travelerhome' element={<TravelerHomes />} />
+
           </Route>
-          
+
           {/* User routes */}
           <Route path="/user" element={
-            <ProtectedRoute allowedRoles={['USER']}>
-              <UserLayout />
-            </ProtectedRoute>
+            // <ProtectedRoute allowedRoles={['USER']}>
+            <UserLayout />
+            // </ProtectedRoute>
           }>
             <Route index element={<UserHome />} />
-            <Route path="home" element={<UserHome />} />
+            {/* <Route path="home" element={<UserHome />} /> */}
             <Route path="new-request" element={<UserNewRequest />} />
             <Route path="track/:id" element={<UserTrack />} />
             <Route path="history" element={<UserHistory />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="booking-confirmation" element={<UserBookingConfirmation />} />
           </Route>
-          
+          <Route path='/user/home' element={<RequestFormPage />} />
+
+
           {/* Traveler routes */}
           <Route path="/traveler" element={
-            <ProtectedRoute allowedRoles={['TRAVELER']}>
-              <TravelerLayout />
-            </ProtectedRoute>
+            // <ProtectedRoute allowedRoles={['TRAVELER']}>
+            <TravelerLayout />
+            // </ProtectedRoute>
           }>
             <Route index element={<TravelerHome />} />
             <Route path="home" element={<TravelerHome />} />
@@ -104,7 +110,7 @@ const AppRoutes = () => {
             <Route path="kyc-pending" element={<TravelerKYCPending />} />
             <Route path="kyc-submit" element={<TravelerKYCSubmit />} />
           </Route>
-          
+
           {/* Admin routes */}
           <Route path="/admin" element={
             <ProtectedRoute allowedRoles={['ADMIN']}>
@@ -120,7 +126,7 @@ const AppRoutes = () => {
             <Route path="profile" element={<AdminProfile />} />
             <Route path="analytics" element={<AdminAnalytics />} />
           </Route>
-          
+
           {/* Unauthorized route */}
           <Route path="/unauthorized" element={<Unauthorized />} />
         </Routes>
