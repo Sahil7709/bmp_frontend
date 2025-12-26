@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import PublicHeader from '../components/PublicHeader';
 import PublicFooter from '../components/PublicFooter';
 import useResponsive from '../core/hooks/useResponsive';
+import FloatingChat from '../core/common/FloatingChat';
 
 const PublicLayout = () => {
   const { isMobile } = useResponsive();
@@ -26,6 +27,7 @@ const PublicLayout = () => {
         }}
       >
         <Outlet />
+        <FloatingChat/>
       </Box>
       <PublicFooter />
     </Box>
