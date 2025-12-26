@@ -16,6 +16,7 @@ export default function Home() {
       <WhyChooseUs />
       <Aboutus/>
       <FAQs />
+      
     </main>
   );
 }
