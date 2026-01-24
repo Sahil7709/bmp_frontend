@@ -2,7 +2,7 @@ import Aboutus from "../../components/home/Aboutus";
 import FAQs from "../../components/home/FAQS";
 import Hero from "../../components/home/Hero";
 import HowBook from "../../components/home/Howbook";
-import WhyChooseUs from "../../components/home/Whychooseus";
+import Why from "../../components/home/Why";
 
 
 /* =====================================================
@@ -13,7 +13,7 @@ export default function Home() {
     <main className="bg-[#FFFDF6] overflow-hidden">
       <Hero />
       <HowBook />
-      <WhyChooseUs />
+      <Why/>
       <Aboutus/>
       <FAQs />
       

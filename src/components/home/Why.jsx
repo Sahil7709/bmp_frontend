@@ -1,12 +1,11 @@
+import React from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-/* =====================================================
-   WHY CHOOSE US
-===================================================== */
-export default function WhyChooseUs() {
+const Why = () => {
   return (
-    <section className="py-18 bg-[#FFFDF6]">
+    <>
+        <section className="py-18 bg-[#FFFDF6]">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* FULL BORDER CONTAINER */}
@@ -55,6 +54,9 @@ export default function WhyChooseUs() {
 
         </div>
       </div>
-    </section>
-  );
+    </section>      
+    </>
+  )
 }
+
+export default Why
