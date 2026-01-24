@@ -22,7 +22,6 @@ const DashboardNavbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
       <div className="flex items-center h-16 px-6">
-        
         {/* 🔹 Logo */}
         <div className="flex items-center gap-2 cursor-pointer">
           <img src={logo1} alt="Book My Parcel" className="h-8" />
@@ -32,13 +31,13 @@ const DashboardNavbar = () => {
         <div className="flex-1" />
 
         {/* 🚀 Send Parcel */}
-      <button
-  onClick={() => navigate("/send-parcel")}
-  className="mr-4 flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition"
->
-  <IoSend className="text-base" />
-  <span>Send Parcel</span>
-</button>
+        <button
+          onClick={() => navigate("/send-parcel")}
+          className="mr-4 flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition"
+        >
+          <IoSend className="text-base" />
+          <span>Send Parcel</span>
+        </button>
 
         {/* 🔔 Notification */}
         <button className="relative mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 transition">
