@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../store/slices/authSlice";
 
 // Logo
-import logo1 from "../../../BMP-FE/src/assets/sneha/logo1.png";
+import logo1 from "../assets/logo1.png";
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();
